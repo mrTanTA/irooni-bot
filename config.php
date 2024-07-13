@@ -132,17 +132,6 @@ function check($return = false){
     die('You do not have access');
 
 }
-function curl_get_file_contents($URL){
-    $c = curl_init();
-    curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($c, CURLOPT_URL, $URL);
-    $contents = curl_exec($c);
-    curl_close($c);
-
-    if ($contents) return $contents;
-    else return FALSE;
-}
-
 function ip_in_range($ip, $range){
     if (strpos($range, '/') == false) {
         $range .= '/32';
@@ -254,11 +243,7 @@ function getMainKeys(){
                 ['text'=>$buttonValues['request_agency'],'callback_data'=>"requestAgency"]
                 ]:
                 []),
-            (($botState['sellState'] == "on" || $from_id == $admin || $userInfo['isAdmin'] == true)?
-                [['text'=>$buttonValues['my_subscriptions'],'callback_data'=>'mySubscriptions'],['text'=>$buttonValues['buy_subscriptions'],'callback_data'=>"buySubscription"]]
-                :
-                [['text'=>$buttonValues['my_subscriptions'],'callback_data'=>'mySubscriptions']]
-                    )
+            
             ]);
     }
     $mainKeys = array_merge($mainKeys,[
@@ -266,7 +251,7 @@ function getMainKeys(){
             ($botState['testAccount'] == "on")?[['text'=>$buttonValues['test_account'],'callback_data'=>"getTestAccount"]]:
                 []
             ),
-        [['text'=>$buttonValues['sharj'],'callback_data'=>"increaseMyWallet"]],
+        [['text'=>$buttonValues['buy_subscriptions'],'callback_data'=>"buySubscription"]],
         [['text'=>$buttonValues['invite_friends'],'callback_data'=>"inviteFriends"],['text'=>$buttonValues['my_info'],'callback_data'=>"myInfo"]],
         (($botState['sharedExistence'] == "on" && $botState['individualExistence'] == "on")?
         [['text'=>$buttonValues['shared_existence'],'callback_data'=>"availableServers"],['text'=>$buttonValues['individual_existence'],'callback_data'=>"availableServers2"]]:[]),
@@ -277,7 +262,7 @@ function getMainKeys(){
         ),
         [['text'=>$buttonValues['application_links'],'callback_data'=>"reciveApplications"],['text'=>$buttonValues['my_tickets'],'callback_data'=>"supportSection"]],
         (($botState['searchState']=="on" || $from_id == $admin || $userInfo['isAdmin'] == true)?
-            [['text'=>$buttonValues['search_config'],'callback_data'=>"showUUIDLeft"]]
+            [['text'=>$buttonValues['my_subscriptions'],'callback_data'=>"mySubscriptions"]]
             :[]),
     ]);
     $stmt = $connection->prepare("SELECT * FROM `setting` WHERE `type` LIKE '%MAIN_BUTTONS%'");

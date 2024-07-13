@@ -21,36 +21,36 @@ do
 			read -p "Are you sure you want to update?[y/n]: " answer
 			echo " "
 			if [ "$answer" != "${answer#[Yy]}" ]; then
-			mv /var/www/html/wizwizxui-timebot/baseInfo.php /root/
+			mv /var/www/html/irooni-timebot/baseInfo.php /root/
 			sudo apt-get install -y git
 			sudo apt-get install -y wget
 			sudo apt-get install -y unzip
 			sudo apt install curl -y
 			echo -e "\n\e[92mUpdating ...\033[0m\n"
 			sleep 4
-			rm -r /var/www/html/wizwizxui-timebot/
+			rm -r /var/www/html/irooni-timebot/
 			echo -e "\n\e[92mWait a few seconds ...\033[0m\n"
 			sleep 3
-			git clone https://github.com/wizwizdev/wizwizxui-timebot.git /var/www/html/wizwizxui-timebot
-			sudo chown -R www-data:www-data /var/www/html/wizwizxui-timebot/
-			sudo chmod -R 755 /var/www/html/wizwizxui-timebot/
+			git clone https://github.com/wizwizdev/wizwizxui-timebot.git /var/www/html/irooni-timebot
+			sudo chown -R www-data:www-data /var/www/html/irooni-timebot/
+			sudo chmod -R 755 /var/www/html/irooni-timebot/
 			sleep 3
-			mv /root/baseInfo.php /var/www/html/wizwizxui-timebot/
+			mv /root/baseInfo.php /var/www/html/irooni-timebot/
 
 			sleep 1
 
-   		db_namewizwiz=$(cat /var/www/html/wizwizxui-timebot/baseInfo.php | grep '$dbName' | cut -d"'" -f2)
-		  db_userwizwiz=$(cat /var/www/html/wizwizxui-timebot/baseInfo.php | grep '$dbUserName' | cut -d"'" -f2)
-		  db_passwizwiz=$(cat /var/www/html/wizwizxui-timebot/baseInfo.php | grep '$dbPassword' | cut -d"'" -f2)
-			bot_token=$(cat /var/www/html/wizwizxui-timebot/baseInfo.php | grep '$botToken' | cut -d"'" -f2)
-			bot_token2=$(cat /var/www/html/wizwizxui-timebot/baseInfo.php | grep '$botToken' | cut -d'"' -f2)
-			bot_url=$(cat /var/www/html/wizwizxui-timebot/baseInfo.php | grep '$botUrl' | cut -d'"' -d"'" -f2)
+   		db_namewizwiz=$(cat /var/www/html/irooni-timebot/baseInfo.php | grep '$dbName' | cut -d"'" -f2)
+		  db_userwizwiz=$(cat /var/www/html/irooni-timebot/baseInfo.php | grep '$dbUserName' | cut -d"'" -f2)
+		  db_passwizwiz=$(cat /var/www/html/irooni-timebot/baseInfo.php | grep '$dbPassword' | cut -d"'" -f2)
+			bot_token=$(cat /var/www/html/irooni-timebot/baseInfo.php | grep '$botToken' | cut -d"'" -f2)
+			bot_token2=$(cat /var/www/html/irooni-timebot/baseInfo.php | grep '$botToken' | cut -d'"' -f2)
+			bot_url=$(cat /var/www/html/irooni-timebot/baseInfo.php | grep '$botUrl' | cut -d'"' -d"'" -f2)
 			
-			filepath="/var/www/html/wizwizxui-timebot/baseInfo.php"
+			filepath="/var/www/html/irooni-timebot/baseInfo.php"
 			
 			bot_value=$(cat $filepath | grep '$admin =' | sed 's/.*= //' | sed 's/;//')
 			
-                        MESSAGE="🤖 WizWiz robot has been successfully updated! "$'\n\n'"🔻token: <code>${bot_token}</code>"$'\n'"🔻admin: <code>${bot_value}</code> "$'\n'"🔻phpmyadmin: <code>https://domain.com/phpmyadmin</code>"$'\n'"🔹db name: <code>${db_namewizwiz}</code>"$'\n'"🔹db username: <code>${db_userwizwiz}</code>"$'\n'"🔹db password: <code>${db_passwizwiz}</code>"$'\n\n'"📢 @wizwizch "
+                        MESSAGE="🤖 irooni robot has been successfully updated! "$'\n\n'"🔻token: <code>${bot_token}</code>"$'\n'"🔻admin: <code>${bot_value}</code> "$'\n'"🔻phpmyadmin: <code>https://domain.com/phpmyadmin</code>"$'\n'"🔹db name: <code>${db_namewizwiz}</code>"$'\n'"🔹db username: <code>${db_userwizwiz}</code>"$'\n'"🔹db password: <code>${db_passwizwiz}</code>"$'\n\n'"📢 @wizwizch "
 			
    			curl -s -X POST "https://api.telegram.org/bot${bot_token}/sendMessage" -d chat_id="${bot_value}" -d text="$MESSAGE" -d parse_mode="html"
 			
@@ -69,17 +69,17 @@ do
 			sleep 2
 
    
-			sudo rm -r /var/www/html/wizwizxui-timebot/webpanel
-			sudo rm -r /var/www/html/wizwizxui-timebot/install
-			rm /var/www/html/wizwizxui-timebot/createDB.php
-			rm /var/www/html/wizwizxui-timebot/updateShareConfig.php
-			rm /var/www/html/wizwizxui-timebot/README.md
-			rm /var/www/html/wizwizxui-timebot/README-fa.md
-			rm /var/www/html/wizwizxui-timebot/LICENSE
-			rm /var/www/html/wizwizxui-timebot/update.sh
-			rm /var/www/html/wizwizxui-timebot/wizwiz.sh
-  			rm /var/www/html/wizwizxui-timebot/tempCookie.txt
-  			rm /var/www/html/wizwizxui-timebot/settings/messagewizwiz.json
+			sudo rm -r /var/www/html/irooni-timebot/webpanel
+			sudo rm -r /var/www/html/irooni-timebot/install
+			rm /var/www/html/irooni-timebot/createDB.php
+			rm /var/www/html/irooni-timebot/updateShareConfig.php
+			rm /var/www/html/irooni-timebot/README.md
+			rm /var/www/html/irooni-timebot/README-fa.md
+			rm /var/www/html/irooni-timebot/LICENSE
+			rm /var/www/html/irooni-timebot/update.sh
+			rm /var/www/html/irooni-timebot/wizwiz.sh
+  			rm /var/www/html/irooni-timebot/tempCookie.txt
+  			rm /var/www/html/irooni-timebot/settings/messagewizwiz.json
 			clear
 			
 			echo -e "\n\e[92mThe script was successfully updated! \033[0m\n"
@@ -97,7 +97,7 @@ do
 			if [ "$answer" != "${answer#[Yy]}" ]; then
    
 			wait
-   			cd /var/www/html/ && find . -mindepth 1 -maxdepth 1 ! -name wizwizxui-timebot -type d -exec rm -r {} \;
+   			cd /var/www/html/ && find . -mindepth 1 -maxdepth 1 ! -name irooni-timebot -type d -exec rm -r {} \;
 
 	 		touch /var/www/html/index.html
     			echo "<!DOCTYPE html><html><head><title>My Website</title></head><body><h1>Hello, world!</h1></body></html>" > /var/www/html/index.html
@@ -189,13 +189,13 @@ do
    			userrr=$(cat /root/confwizwiz/dbrootwizwiz.txt | grep '$user' | cut -d"'" -f2)
 			pathsss=$(cat /root/confwizwiz/dbrootwizwiz.txt | grep '$path' | cut -d"'" -f2)
 			pathsss=$(cat /root/confwizwiz/dbrootwizwiz.txt | grep '$path' | cut -d"'" -f2)
-			passsword=$(cat /var/www/html/wizwizxui-timebot/baseInfo.php | grep '$dbPassword' | cut -d"'" -f2)
-   			userrrname=$(cat /var/www/html/wizwizxui-timebot/baseInfo.php | grep '$dbUserName' | cut -d"'" -f2)
+			passsword=$(cat /var/www/html/irooni-timebot/baseInfo.php | grep '$dbPassword' | cut -d"'" -f2)
+   			userrrname=$(cat /var/www/html/irooni-timebot/baseInfo.php | grep '$dbUserName' | cut -d"'" -f2)
 			
 			mysql -u $userrr -p$passs -e "DROP DATABASE wizwiz;" -e "DROP USER '$userrrname'@'localhost';" -e "DROP USER '$userrrname'@'%';"
 
 			sudo rm -r /var/www/html/wizpanel${pathsss}
-			sudo rm -r /var/www/html/wizwizxui-timebot
+			sudo rm -r /var/www/html/irooni-timebot
 			
 			clear
 			

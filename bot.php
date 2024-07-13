@@ -1243,12 +1243,12 @@ if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) &
         }
         $last_num++;
         
-        if($botState['remark'] == "digits"){
-            $rnd = rand(10000,99999);
-            $remark = "{$srv_remark}-{$rnd}";
+       if($botState['remark'] == "digits"){
+            $rnd = rand(1,999);
+            $remark = "{$srv_remark}-{$username}-{$rnd}";
         }else{
-            $rnd = rand(1111,99999);
-            $remark = "{$srv_remark}-{$from_id}-{$rnd}";
+            $rnd = rand(1,999);
+            $remark = "{$srv_remark}-{$username}-{$rnd}";
         }
     
         if($inbound_id == 0){                    
@@ -1256,7 +1256,7 @@ if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) &
                 $response = addMarzbanUser($server_id, $remark, $volume, $days, $fid);
                 if(!$response->success){
                     if($response->msg == "User already exists"){
-                        $remark .= rand(1111,99999);
+                        $remark .= rand(1,999);
                         $response = addMarzbanUser($server_id, $remark, $volume, $days, $fid);
                     }
                 }
@@ -1311,7 +1311,7 @@ if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) &
     
         🔮 $remark \n " . ($botState['configLinkState'] != "off" && $serverType != "marzban"?"<code>$link</code>":"");
             if($botState['subLinkState'] == "on") $acc_text .= 
-            " \n🌐 subscription : <code>$subLink</code>";
+            " \n❤️‍🩹 اتصال هوشمند : <code>$subLink</code>";
         
             $file = RandomString() .".png";
             
@@ -1667,15 +1667,15 @@ if(preg_match('/havePaiedWeSwap(.*)/',$data,$match)) {
         $last_num = $savedinfo[1] + 1;
         
         if($botState['remark'] == "digits"){
-            $rnd = rand(10000,99999);
-            $remark = "{$srv_remark}-{$rnd}";
+            $rnd = rand(1,999);
+            $remark = "{$srv_remark}-{$username}-{$rnd}";
         }
         elseif($botState['remark'] == "manual"){
             $remark = $payInfo['description'];
         }
         else{
-            $rnd = rand(1111,99999);
-            $remark = "{$srv_remark}-{$from_id}-{$rnd}";
+            $rnd = rand(1,999);
+            $remark = "{$srv_remark}-{$username}-{$rnd}";
         }
         if(!empty($description)) $remark = $description;
         if($portType == "auto"){
@@ -1740,21 +1740,23 @@ if(preg_match('/havePaiedWeSwap(.*)/',$data,$match)) {
         foreach($vraylink as $link){
         $acc_text = "
         
-😍 سفارش جدید شما
+ایرونی، 
+
+🥺 سفارش جدید شما
 📡 پروتکل: $protocol
 🔮 نام سرویس: $remark
 🔋حجم سرویس: $volume گیگ
 ⏰ مدت سرویس: $days روز⁮⁮ ⁮⁮
 " . ($botState['configLinkState'] != "off" && $serverType != "marzban"?"
-💝 config : <code>$link</code>":"");
+❤️‍🩹  config : <code>$link</code>":"");
 
 if($botState['subLinkState'] == "on") $acc_text .= "
-
-🔋 Volume web: <code> $botUrl"."search.php?id=".$uniqid."</code>
-
-
-🌐 subscription : <code>$subLink</code>
-        
+❤️‍🩹 اتصال هوشمند : $subLink
+        (روی لینک بالا کلیک کنید)
+		
+		 با ایرونی متصل باشید:) h7
+		 h1
+		 
         ";
               
             $file = RandomString() .".png";
@@ -2977,19 +2979,22 @@ if(preg_match('/payCustomWithWallet(.*)/',$data, $match)){
     define('IMAGE_HEIGHT',540);
     foreach($vraylink as $link){
         $acc_text = "
-😍 سفارش جدید شما
+ایرونی، 
+
+🥺 سفارش جدید شما
 📡 پروتکل: $protocol
 🔮 نام سرویس: $remark
 🔋حجم سرویس: $volume گیگ
 ⏰ مدت سرویس: $days روز⁮⁮ ⁮⁮
 " . ($botState['configLinkState'] != "off" && $serverType != "marzban"?"
-💝 config : <code>$link</code>":"");
+❤️‍🩹 config : <code>$link</code>":"");
 if($botState['subLinkState'] == "on") $acc_text .= "
 
-🔋 Volume web: <code> $botUrl"."search.php?id=".$uniqid."</code>
+❤️‍🩹 اتصال هوشمند : $subLink
+(روی لینک بالا کلیک کنید)
 
-
-🌐 subscription : <code>$subLink</code>"; 
+ با ایرونی متصل باشید:)h2
+ "; 
     
         $file = RandomString() .".png";
         $ecc = 'L';
@@ -3027,12 +3032,11 @@ if($botState['subLinkState'] == "on") $acc_text .= "
          
         sendMessage("تبریک یکی از زیر مجموعه های شما خرید انجام داد شما مبلغ " . number_format($inviteAmount) . " تومان جایزه دریافت کردید",null,null,$inviterId);
     }
-    
-    $agentBought = $payInfo['agent_bought'];
+
 	$stmt = $connection->prepare("INSERT INTO `orders_list` 
-	    (`userid`, `token`, `transid`, `fileid`, `server_id`, `inbound_id`, `remark`, `uuid`, `protocol`, `expire_date`, `link`, `amount`, `status`, `date`, `notif`, `rahgozar`, `agent_bought`)
-	    VALUES (?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?, ?,1, ?, 0, ?, ?);");
-    $stmt->bind_param("ssiiisssisiiii", $uid, $token, $fid, $server_id, $inbound_id, $remark, $uniqid, $protocol, $expire_date, $vray_link, $price, $date, $rahgozar, $agentBought);
+	    (`userid`, `token`, `transid`, `fileid`, `server_id`, `inbound_id`, `remark`, `uuid`, `protocol`, `expire_date`, `link`, `amount`, `status`, `date`, `notif`, `rahgozar`)
+	    VALUES (?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?, ?,1, ?, 0, ?);");
+    $stmt->bind_param("ssiiisssisiii", $uid, $token, $fid, $server_id, $inbound_id, $remark, $uniqid, $protocol, $expire_date, $vray_link, $price, $date, $rahgozar);
     $stmt->execute();
     $order = $stmt->get_result(); 
     $stmt->close();
@@ -3383,18 +3387,21 @@ if(preg_match('/accCustom(.*)/',$data, $match) and $text != $buttonValues['cance
 
     foreach($vraylink as $vray_link){
         $acc_text = "
-😍 سفارش جدید شما
+ایرونی، 
+
+🥺 سفارش جدید شما
 📡 پروتکل: $protocol
 🔮 نام سرویس: $remark
 🔋حجم سرویس: $volume گیگ
 ⏰ مدت سرویس: $days روز⁮⁮ ⁮⁮
 " . ($botState['configLinkState'] != "off" && $serverType != "marzban"?"
-💝 config : <code>$vray_link</code>":"");
+❤️‍🩹 config : <code>$vray_link</code>":"");
 if($botState['subLinkState'] == "on") $acc_text .= "
+❤️‍🩹 اتصال هوشمند : $subLink
+(روی لینک بالا کلیک کنید)
 
-🔋 Volume web: <code> $botUrl"."search.php?id=".$uniqid."</code>
-
-\n🌐 subscription : <code>$subLink</code>";
+ با ایرونی متصل باشید:)h3
+ ";
     
         $file = RandomString() .".png";
         $ecc = 'L';
@@ -3418,11 +3425,10 @@ if($botState['subLinkState'] == "on") $acc_text .= "
     }
     sendMessage('✅ کانفیگ و براش ارسال کردم', getMainKeys());
     
-    $agentBought = $payInfo['agent_bought'];
 	$stmt = $connection->prepare("INSERT INTO `orders_list` 
-	    (`userid`, `token`, `transid`, `fileid`, `server_id`, `inbound_id`, `remark`, `uuid`, `protocol`, `expire_date`, `link`, `amount`, `status`, `date`, `notif`, `rahgozar`, `agent_bought`)
-	    VALUES (?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?, ?,1, ?, 0, ?, ?);");
-    $stmt->bind_param("ssiiisssisiiii", $uid, $token, $fid, $server_id, $inbound_id, $remark, $uniqid, $protocol, $expire_date, $vray_link, $price, $date, $rahgozar, $agentBought);
+	    (`userid`, `token`, `transid`, `fileid`, `server_id`, `inbound_id`, `remark`, `uuid`, `protocol`, `expire_date`, `link`, `amount`, `status`, `date`, `notif`, `rahgozar`)
+	    VALUES (?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?, ?,1, ?, 0, ?);");
+    $stmt->bind_param("ssiiisssisiii", $uid, $token, $fid, $server_id, $inbound_id, $remark, $uniqid, $protocol, $expire_date, $vray_link, $price, $date, $rahgozar);
     $stmt->execute();
     $order = $stmt->get_result();
     $stmt->close();
@@ -3627,16 +3633,17 @@ if(preg_match('/payWithWallet(.*)/',$data, $match)){
         
         
             if($botState['remark'] == "digits"){
-                $rnd = rand(10000,99999);
-                $remark = "{$srv_remark}-{$rnd}";
+                $rnd = rand(1,999);
+                $remark = "{$srv_remark}-{$username}-{$rnd}";
             }
             elseif($botState['remark'] == "manual"){
                 $remark = $payInfo['description'];
             }
             else{
-                $rnd = rand(1111,99999);
-                $remark = "{$srv_remark}-{$from_id}-{$rnd}";
+                $rnd = rand(1,999);
+                $remark = "{$srv_remark}-{$username}-{$rnd}";
             }
+        //heree
         
             if($portType == "auto"){
                 file_put_contents('settings/temp.txt',$port.'-'.$last_num);
@@ -3701,18 +3708,18 @@ if(preg_match('/payWithWallet(.*)/',$data, $match)){
 
             foreach($vraylink as $link){
                 $acc_text = "
-😍 سفارش جدید شما
+ایرونی، 
+
+🥺 سفارش جدید شما
 📡 پروتکل: $protocol
 🔮 نام سرویس: $remark
 🔋حجم سرویس: $volume گیگ
 ⏰ مدت سرویس: $days روز⁮⁮ ⁮⁮
 " . ($botState['configLinkState'] != "off" && $serverType != "marzban"?"
-💝 config : <code>$link</code>":"");
+❤️‍🩹 config : <code>$link</code>":"");
 if($botState['subLinkState'] == "on") $acc_text .= "
-
-🔋 Volume web: <code> $botUrl"."search.php?id=".$uniqid."</code>
-
-\n🌐 subscription : <code>$subLink</code>";
+برای دانلود برنامه و استفاده از کانفیگ ها از دکمه اتصال هوشمند استفاده کنید 👇
+ ";
             
                 $file = RandomString() .".png";
                 $ecc = 'L';
@@ -3731,7 +3738,7 @@ if($botState['subLinkState'] == "on") $acc_text .= "
                 imagedestroy($backgroundImage);
                 imagedestroy($qrImage);
 
-            	sendPhoto($botUrl . $file, $acc_text,json_encode(['inline_keyboard'=>[[['text'=>$buttonValues['back_to_main'],'callback_data'=>"mainMenu"]]]]),"HTML", $uid);
+            	sendPhoto($botUrl . $file, $acc_text,json_encode(['inline_keyboard'=>[[['text'=>$buttonValues['salamsub'],'url'=>$subLink]]]]),"HTML", $uid);
                 unlink($file);
             }
             
@@ -4155,19 +4162,28 @@ if(preg_match('/accept(.*)/',$data, $match) and $text != $buttonValues['cancel']
             $port = $savedinfo[0] + 1;
             $last_num = $savedinfo[1] + 1;
     
+            $stmt = $connection->prepare("SELECT * FROM `users` WHERE `userid`=?");
+            $stmt->bind_param("i", $uid);
+            $stmt->execute();
+            $user_detail= $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            $uname = $user_detail['name'];
+            $user_name = $user_detail['username'];
+
+    
     
             if($botState['remark'] == "digits"){
-                $rnd = rand(10000,99999);
-                $remark = "{$srv_remark}-{$rnd}";
+                $rnd = rand(1,999);
+                $remark = "{$srv_remark}-{$user_name}-{$rnd}";
             }
             elseif($botState['remark'] == "manual"){
                 $remark = $payInfo['description'];
             }
             else{
-                $rnd = rand(1111,99999);
-                $remark = "{$srv_remark}-{$uid}-{$rnd}";
+                $rnd = rand(1,999);
+                $remark = "{$srv_remark}-{$user_name}-{$rnd}";
             }
-        
+        //here2
             if($portType == "auto"){
                 file_put_contents('settings/temp.txt',$port.'-'.$last_num);
             }else{
@@ -4230,18 +4246,18 @@ if(preg_match('/accept(.*)/',$data, $match) and $text != $buttonValues['cancel']
             }
             foreach($vraylink as $link){
                 $acc_text = "
-😍 سفارش جدید شما
+ایرونی، 
+
+🥺 سفارش جدید شما
 📡 پروتکل: $protocol
 🔮 نام سرویس: $remark
 🔋حجم سرویس: $volume گیگ
 ⏰ مدت سرویس: $days روز
 " . ($botState['configLinkState'] != "off" && $serverType != "marzban"?"
-💝 config : <code>$link</code>":"");
+❤️‍🩹 config : <code>$link</code>":"");
 if($botState['subLinkState'] == "on") $acc_text .= "
-
-🔋 Volume web: <code> $botUrl"."search.php?id=".$uniqid."</code>
-
-\n🌐 subscription : <code>$subLink</code>";
+برای دانلود برنامه و استفاده از کانفیگ ها از دکمه اتصال هوشمند استفاده کنید 👇
+ ";
             
                 $file = RandomString() .".png";
                 $ecc = 'L';
@@ -4261,7 +4277,7 @@ if($botState['subLinkState'] == "on") $acc_text .= "
                 imagedestroy($backgroundImage);
                 imagedestroy($qrImage);
 
-            	sendPhoto($botUrl . $file, $acc_text,json_encode(['inline_keyboard'=>[[['text'=>$buttonValues['back_to_main'],'callback_data'=>"mainMenu"]]]]),"HTML", $uid);
+            	sendPhoto($botUrl . $file, $acc_text,json_encode(['inline_keyboard'=>[[['text'=>$buttonValues['salamsub'],'url'=>$subLink]]]]),"HTML", $uid);
                 unlink($file);
             }
             $agent_bought = $payInfo['agent_bought'];
@@ -5626,11 +5642,11 @@ if(preg_match('/freeTrial(\d+)/',$data,$match)) {
         setUser('','temp');
     }else{
         if($botState['remark'] == "digits"){
-            $rnd = rand(10000,99999);
-            $remark = "{$srv_remark}-{$rnd}";
+            $rnd = rand(1,999);
+            $remark = "{$srv_remark}-{$username}-{$rnd}";
         }else{
-            $rnd = rand(1111,99999);
-            $remark = "{$srv_remark}-{$from_id}-{$rnd}";
+            $rnd = rand(1,999);
+            $remark = "{$srv_remark}-{$username}-{$rnd}";
         }
     }
     
@@ -5644,7 +5660,7 @@ if(preg_match('/freeTrial(\d+)/',$data,$match)) {
             $response = addMarzbanUser($server_id, $remark, $volume, $days, $id);
             if(!$response->success){
                 if($response->msg == "User already exists"){
-                    $remark .= rand(1111,99999);
+                    $remark .= rand(1,999);
                     $response = addMarzbanUser($server_id, $remark, $volume, $days, $id);
                 }
             }
@@ -5696,18 +5712,18 @@ if(preg_match('/freeTrial(\d+)/',$data,$match)) {
     define('IMAGE_HEIGHT',540);
     foreach($vraylink as $link){
         $acc_text = "
-😍 سفارش جدید شما
+ایرونی، 
+
+🥺 سفارش جدید شما
 📡 پروتکل: $protocol
 🔮 نام سرویس: $remark
 🔋حجم سرویس: $volume گیگ
 ⏰ مدت سرویس: $days روز
 " . ($botState['configLinkState'] != "off" && $serverType != "marzban"?"
-💝 config : <code>$link</code>":"");
+❤️‍🩹 config : <code>$link</code>":"");
 if($botState['subLinkState'] == "on") $acc_text .= "
-
-🔋 Volume web: <code> $botUrl"."search.php?id=".$uniqid."</code>
-
-\n🌐 subscription : <code>$subLink</code>";
+برای دانلود برنامه و استفاده از کانفیگ ها از دکمه اتصال هوشمند استفاده کنید 👇
+ ";
     
         $file = RandomString().".png";
         $ecc = 'L'; 
@@ -5726,7 +5742,7 @@ if($botState['subLinkState'] == "on") $acc_text .= "
         imagedestroy($backgroundImage);
         imagedestroy($qrImage);
 
-        sendPhoto($botUrl . $file, $acc_text,json_encode(['inline_keyboard'=>[[['text'=>$buttonValues['back_to_main'],'callback_data'=>"mainMenu"]]]]),"HTML");
+        sendPhoto($botUrl . $file, $acc_text,json_encode(['inline_keyboard'=>[[['text'=>$buttonValues['salamsub'],'url'=>$subLink]]]]),"HTML");
         unlink($file);
     }
 	$stmt = $connection->prepare("INSERT INTO `orders_list` 
@@ -8171,11 +8187,11 @@ if(preg_match('/switchServer(.+)_(.+)/',$data,$match)){
 
 
     if($botState['remark'] == "digits"){
-        $rnd = rand(10000,99999);
-        $newRemark = "{$srv_remark}-{$rnd}";
+        $rnd = rand(1,999);
+        $newRemark = "{$srv_remark}-{$username}-{$rnd}";
     }else{
-        $rnd = rand(1111,99999);
-        $newRemark = "{$srv_remark}-{$from_id}-{$rnd}";
+        $rnd = rand(1,999);
+        $newRemark = "{$srv_remark}-{$username}-{$rnd}";
     }
 	
     if(preg_match('/vmess/',$link)){
@@ -9825,12 +9841,7 @@ if(preg_match('/^editServerPanePassword(.*)/',$userInfo['step'],$match) and $tex
     sendMessage('☑️ مدیریت سرور ها:',$keys);
     setUser();
 }
-if(preg_match('/^wizwizdeleteserver(\d+)/',$data,$match) and ($from_id == $admin || ($userInfo['isAdmin'] == true && $permissions['servers']))){
-    editText($message_id,"از حذف سرور مطمئنی؟",json_encode(['inline_keyboard'=>[
-        [['text'=>"بله",'callback_data'=>"yesDeleteServer" . $match[1]],['text'=>"نخير",'callback_data'=>"showServerSettings" . $match[1] . "_0"]]
-        ]]));
-}
-if(preg_match('/^yesDeleteServer(\d+)/',$data,$match) && ($from_id == $admin || ($userInfo['isAdmin'] == true && $permissions['servers']))){
+if(preg_match('/^wizwizdeleteserver(\d+)/',$data,$match) and ($from_id == $admin || $userInfo['isAdmin'] == true)){
     $stmt = $connection->prepare("DELETE FROM `server_info` WHERE `id`=?");
     $stmt->bind_param("i", $match[1]);
     $stmt->execute();
@@ -10071,7 +10082,7 @@ if($data == "managePanel" and (($from_id == $admin || $userInfo['isAdmin'] == tr
 👤 عزیزم به بخش مدیریت خوشومدی 
 🤌 هرچی نیاز داشتی میتونی اینجا طبق نیازهات اضافه و تغییر بدی ، عزیزم $first_name جان اگه از فروش ربات درآمد داری از من حمایت کن تا پروژه همیشه آپدیت بمونه !
 
-🆔 @wizwizch
+🆔 @IRooni_forosh
 
 🚪 /start
 ";
