@@ -98,10 +98,10 @@ sudo systemctl restart apache2.service
 
 wait
 
-git clone https://github.com/wizwizdev/wizwizxui-timebot.git /var/www/html/irooni-timebot
+git clone https://github.com/mrTanTA/irooni-bot.git /var/www/html/irooni-timebot
 sudo chown -R www-data:www-data /var/www/html/irooni-timebot/
 sudo chmod -R 755 /var/www/html/irooni-timebot/
-echo -e "\n\033[33mWizWiz config and script have been installed successfully\033[0m"
+echo -e "\n\033[33mIRooni config and script have been installed successfully\033[0m"
 
 wait
     
@@ -164,11 +164,11 @@ clear
 
 echo " "
 echo -e "\e[32m
-██     ██ ██ ███████ ██     ██ ██ ███████     ███████ ███████ ██      
-██     ██ ██    ███  ██     ██ ██    ███      ██      ██      ██      
-██  █  ██ ██   ███   ██  █  ██ ██   ███       ███████ ███████ ██      
-██ ███ ██ ██  ███    ██ ███ ██ ██  ███             ██      ██ ██      
- ███ ███  ██ ███████  ███ ███  ██ ███████     ███████ ███████ ███████ 
+	███████ ███████ ██      
+    ██      ██      ██      
+    ███████ ███████ ██      
+         ██      ██ ██      
+    ███████ ███████ ███████ 
 \033[0m\n"
 
 read -p "Enter the domain: " domainname
@@ -318,7 +318,7 @@ wait
         sleep 1
 
         curl -F "url=https://${YOUR_DOMAIN}/irooni-timebot/bot.php" "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/setWebhook"
-        MESSAGE="✅ The wizwiz bot has been successfully installed! @wizwizch"
+        MESSAGE="✅ The irooni bot has been successfully installed! Good luck Amir"
         curl -s -X POST "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/sendMessage" -d chat_id="${YOUR_CHAT_ID}" -d text="$MESSAGE"
         
         
@@ -356,7 +356,7 @@ wait
         
         echo " "
         
-        echo -e "Good Luck Baby! \e[94mThis project is for free. If you like it, be sure to donate me :) , so let's go \033[0m\n"
+        echo -e "Good Luck Baby! \e[94m so let's go \033[0m\n"
 
         fi
 
