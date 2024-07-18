@@ -341,7 +341,7 @@ wait
 	rm /var/www/html/irooni-timebot/tempCookie.txt
 	rm /var/www/html/irooni-timebot/settings/messagewizwiz.json
             
-        clear
+      
         
         echo " "
         
