@@ -282,8 +282,7 @@ $mainValues = [
     'you_have_partially_paid'=>"تراکنش TYPE شما با تکسید آیدی: TAXID
 
 <b>به دلیل عدم مطابقت مبلغ تراکنش رد شد</b>",
-    'agent_discount_settings'=>"مدیریت تخفیف های نماینده AGENT-NAME",
-    'config_doesnt_exist'=>"کانفیگ یافت نشد"
+    'agent_discount_settings'=>"مدیریت تخفیف های نماینده AGENT-NAME"
 ];
 
 $buttonValues = [
@@ -343,7 +342,7 @@ $buttonValues = [
     'invite_friends'=>" زیر مجموعه گیری",
     'my_info'=>" حساب کاربری",
     'my_subscriptions'=>'📱 کانفیگ های من',
-    'buy_subscriptions'=>'🛒  خرید فیلترشگن',
+    'buy_subscriptions'=>'❤️ 🛒  خرید فیلترشگن',
     'shared_existence'=>"❕ موجودی اشتراکی ",
     'individual_existence'=>"❗️ موجودی اختصاصی ",
     'application_links'=>'❤️ آموزش اتصال',

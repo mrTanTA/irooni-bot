@@ -2,6 +2,7 @@
 include_once '../baseInfo.php';
 include_once '../config.php';
 
+
 $sellState=$botState['sellState']=="off"?"خاموش ❌":"روشن ✅";
 $searchState=$botState['searchState']=="off"?"خاموش ❌":"روشن ✅";
 $rewaredTime = ($botState['rewaredTime']??0);
