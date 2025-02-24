@@ -112,7 +112,7 @@ echo "Directory created: ${RANDOM_CODE}"
 echo "Folder created successfully!"
 
  cd /var/www/html/
- wget -O wizwizpanel.zip https://github.com/wizwizdev/wizwizxui-timebot/releases/download/10.3.1/wizwizpanel.zip
+ wget -O wizwizpanel.zip https://github.com/wizwizdev/wizwizxui-timebot/releases/download/10.1.5/wizwizpanel.zip
 
  file_to_transfer="/var/www/html/wizwizpanel.zip"
  destination_dir=$(find /var/www/html -type d -name "*${RANDOM_CODE}*" -print -quit)
@@ -188,12 +188,12 @@ DOMAIN_NAME="$domainname"
 
 # update cron
 PATHS=$(cat /root/confwizwiz/dbrootwizwiz.txt | grep '$path' | cut -d"'" -f2)
-(crontab -l ; echo "* * * * * curl http://${DOMAIN_NAME}/irooni-timebot/settings/messagewizwiz.php >/dev/null 2>&1") | sort - | uniq - | crontab -
-(crontab -l ; echo "* * * * * curl http://${DOMAIN_NAME}/irooni-timebot/settings/rewardReport.php >/dev/null 2>&1") | sort - | uniq - | crontab -
-(crontab -l ; echo "* * * * * curl http://${DOMAIN_NAME}/irooni-timebot/settings/warnusers.php >/dev/null 2>&1") | sort - | uniq - | crontab -
-(crontab -l ; echo "* * * * * curl http://${DOMAIN_NAME}/irooni-timebot/settings/gift2all.php >/dev/null 2>&1") | sort - | uniq - | crontab -
-(crontab -l ; echo "*/3 * * * * curl http://${DOMAIN_NAME}/irooni-timebot/settings/tronChecker.php >/dev/null 2>&1") | sort - | uniq - | crontab -
-(crontab -l ; echo "* * * * * curl http://${DOMAIN_NAME}/${PATHS}/backupnutif.php >/dev/null 2>&1") | sort - | uniq - | crontab -
+(crontab -l ; echo "* * * * * curl https://${DOMAIN_NAME}/irooni-timebot/settings/messagewizwiz.php >/dev/null 2>&1") | sort - | uniq - | crontab -
+(crontab -l ; echo "* * * * * curl https://${DOMAIN_NAME}/irooni-timebot/settings/rewardReport.php >/dev/null 2>&1") | sort - | uniq - | crontab -
+(crontab -l ; echo "* * * * * curl https://${DOMAIN_NAME}/irooni-timebot/settings/warnusers.php >/dev/null 2>&1") | sort - | uniq - | crontab -
+(crontab -l ; echo "* * * * * curl https://${DOMAIN_NAME}/irooni-timebot/settings/gift2all.php >/dev/null 2>&1") | sort - | uniq - | crontab -
+(crontab -l ; echo "*/3 * * * * curl https://${DOMAIN_NAME}/irooni-timebot/settings/tronChecker.php >/dev/null 2>&1") | sort - | uniq - | crontab -
+(crontab -l ; echo "* * * * * curl https://${DOMAIN_NAME}/${PATHS}/backupnutif.php >/dev/null 2>&1") | sort - | uniq - | crontab -
 
 echo -e "\n\e[92m Setting Up Cron...\033[0m\n"
 
@@ -311,13 +311,13 @@ wait
         echo -e "${ASAS}dbUserName = '${dbuser}';" >> /var/www/html/irooni-timebot/baseInfo.php
         echo -e "${ASAS}dbPassword = '${dbpass}';" >> /var/www/html/irooni-timebot/baseInfo.php
         echo -e "${ASAS}dbName = '${dbname}';" >> /var/www/html/irooni-timebot/baseInfo.php
-        echo -e "${ASAS}botUrl = 'http://${YOUR_DOMAIN}/irooni-timebot/';" >> /var/www/html/irooni-timebot/baseInfo.php
+        echo -e "${ASAS}botUrl = 'https://${YOUR_DOMAIN}/irooni-timebot/';" >> /var/www/html/irooni-timebot/baseInfo.php
         echo -e "${ASAS}admin = ${YOUR_CHAT_ID};" >> /var/www/html/irooni-timebot/baseInfo.php
         echo -e "?>" >> /var/www/html/irooni-timebot/baseInfo.php
 
         sleep 1
 
-        curl -F "url=http://${YOUR_DOMAIN}/irooni-timebot/bot.php" "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/setWebhook"
+        curl -F "url=https://${YOUR_DOMAIN}/irooni-timebot/bot.php" "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/setWebhook"
         MESSAGE="✅ The irooni bot has been successfully installed! Good luck Amir"
         curl -s -X POST "https://api.telegram.org/bot${YOUR_BOT_TOKEN}/sendMessage" -d chat_id="${YOUR_CHAT_ID}" -d text="$MESSAGE"
         
@@ -352,7 +352,7 @@ wait
         echo -e "\e[33mDatabase password: \e[36m${dbpass}\033[0m"
         echo " "
         echo -e "\e[100mwizwiz panel:\033[0m"
-        echo -e "\e[33maddres: \e[36mhttp://${YOUR_DOMAIN}/${RANDOM_CODE}/login.php\033[0m"
+        echo -e "\e[33maddres: \e[36mhttps://${YOUR_DOMAIN}/${RANDOM_CODE}/login.php\033[0m"
         
         echo " "
         

@@ -1062,23 +1062,9 @@ function getBotSettingKeys(){
             ['text'=>"نوع ریمارک",'callback_data'=>"wizwizch"]
         ],
         [
-            ['text'=>$rewaredTime,'callback_data'=>'editRewaredTime'],
+            ['text'=>$rewaredTime,'callback_data'=>'editRewardTime'],
             ['text'=>"ارسال گزارش درآمد", 'callback_data'=>'wizwizch']
             ],
-
-            [
-                ['text'=>$botState['cartToCartAutoAcceptState']=="on"?$buttonValues['on']:$buttonValues['off'],'callback_data'=>"changeBotcartToCartAutoAcceptState"],
-                ['text'=>"تأیید خودکار کارت به کارت",'callback_data'=>"wizwizch"]
-            ],
-            ($botState['cartToCartAutoAcceptState']=="on"?[
-                ['text'=>($botState['cartToCartAutoAcceptType'] == "0"?"نماینده":($botState['cartToCartAutoAcceptType'] == "1"?"کاربر":"همه")),'callback_data'=>"changeBotcartToCartAutoAcceptType"],
-                ['text'=>"نوع تأیید",'callback_data'=>"wizwizch"]
-            ]:[]),
-            ($botState['cartToCartAutoAcceptState']=="on"?[
-                ['text'=>($botState['cartToCartAutoAcceptTime']??"10") . " دقیقه",'callback_data'=>"editcartToCartAutoAcceptTime"],
-                ['text'=>"زمان تأیید خودکار ",'callback_data'=>"wizwizch"]
-            ]:[]),
-            
         [['text'=>$buttonValues['back_button'],'callback_data'=>"managePanel"]]
         ]]);
 
@@ -2354,7 +2340,6 @@ function deleteClient($server_id, $inbound_id, $uuid, $delete = 0){
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 3);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 3); 
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($postFields));
         curl_setopt($curl, CURLOPT_HEADER, 1);
